@@ -4,34 +4,45 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ConsoleAppTaxCal
+namespace ConsoleAppMaxof3
 {
     class Program
     {
-        static void TaxCalculation(int salary)
+        static void MaxOf3(int x , int y, int z)
         {
-            if(salary < 10000 )
+            if(x  > y && x > z)
             {
-                Console.WriteLine("Your Tax Percentage is 5%");
-                Console.WriteLine("Total Tax:" + ((salary * 5) / 100));
+                Console.WriteLine("{0} is Greatest among {0} {1} {2}", x,y,z);
             }
-            else if(salary >= 10000 && salary <= 100000)
+            else if(y > x && y > z)
             {
-                Console.WriteLine("Your Tax Percentage is 8%");
-                Console.WriteLine("Total Tax:" + ((salary * 8) / 100));
+                Console.WriteLine("{0} is Greatest among {0} {1} {2}", y, x, z);
             }
             else
             {
-                Console.WriteLine("Your Tax Percentage is 8.5%");
-                Console.WriteLine("Total Tax :" + ((salary * 8.5) / 100));
+                Console.WriteLine("{0} is Greatest among {0} {1} {2}", z, y,x);
             }
+            
             Console.ReadLine();
+
         }
+
         static void Main(string[] args)
         {
-            Console.Write("Enter your Salary: ");
-            int Salary = Convert.ToInt32(Console.ReadLine());
-            TaxCalculation(Salary);
+            string a, b, c;
+            Console.Write("Enter Num1: ");
+            a = Console.ReadLine();
+            Console.Write("Enter Num2: ");
+            b = Console.ReadLine();
+            Console.Write("Enter Num3: ");
+            c = Console.ReadLine();
+
+
+            int num1 = Convert.ToInt32(a);
+            int num2 = Convert.ToInt32(b);
+            int num3 = Convert.ToInt32(c);
+
+            MaxOf3(num1, num2, num3);
 
         }
     }
