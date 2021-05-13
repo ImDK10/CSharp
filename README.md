@@ -1,5 +1,8 @@
 - 👋 Hi, I’m Dilip Kumar (@ImDK10)
 - 👀 I’m interested in Software Testing & Development
+-  I'm Good at Python , C 
+-  JAVA Beginner 
+-  I do have good Knowledge on MySQL Database
 - 🌱 I’m currently learning C# , .NET Framework for QualityLeap (Testing)
 - 📫 How to reach me -> imdk6886@gmail.com
 
