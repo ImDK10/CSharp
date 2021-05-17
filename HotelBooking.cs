@@ -13,10 +13,19 @@ namespace ConsoleAppHotelBooking
         public int numofdays;
         public string AC_NONAC;
         public DateTime Check_in_Date;
+        protected DateTime Checkoutdate;
         public long mobile;
-        public int persons;
         public string single_double;
-        public string hot_coldwater;
+
+        public void bookinglist()
+        {
+            Console.WriteLine($"{single_double}\t\t{Check_in_Date.ToString("MM/dd/yyyy")}\t\t{Checkoutdate.ToString("MM/dd/yyyy")}\t\t{name}\t\t{mobile}");
+        }
+
+        public static void bookinglistheading()
+        {
+            Console.WriteLine($"TYPE\t\tCHECKINN\t\tCHECKOUT\t\tNAME\t\tPHONE");
+        }
 
 
         public void hotelmethod()
@@ -25,7 +34,7 @@ namespace ConsoleAppHotelBooking
             Console.WriteLine("********************************");
             Console.WriteLine("CHOOSE YOUR BOOKING OPTION:");
             Console.WriteLine("--------------------------------");
-            Console.WriteLine($"1.Single\n2.Deluxe\n3.suite\n4.Exit");
+            Console.WriteLine($"1.Single\n2.Deluxe\n3.suite\n4.Exit\n5.list of bookings");
             Console.WriteLine("********************************");
         }
     }
@@ -47,12 +56,18 @@ namespace ConsoleAppHotelBooking
             Console.Write("Enter Check in date: ");
             Check_in_Date = DateTime.Parse(Console.ReadLine());
             Console.Write("Enter Mobile Number: ");
+            Checkoutdate = Check_in_Date.AddDays(numofdays);
             mobile = Convert.ToInt64(Console.ReadLine());
+            single_double = "Single";
 
         }
 
         public void SingleDisplay()
         {
+            Console.WriteLine("********************************");
+            Console.WriteLine("Your Booking Details");
+            Console.WriteLine("********************************");
+            Console.ForegroundColor = ConsoleColor.Blue;
             Console.WriteLine("Name: " + name);
             Console.WriteLine("Aadhar: " + aadhar);
             Console.WriteLine("numofdays: " + numofdays);
@@ -61,6 +76,7 @@ namespace ConsoleAppHotelBooking
             DateTime checkout = Check_in_Date.AddDays(numofdays);
             Console.WriteLine("Check_out: " + checkout.ToString("MM/dd/yyyy"));
             Console.WriteLine("Mobile: " + mobile);
+            Console.ForegroundColor = ConsoleColor.White;
             Console.WriteLine("********************************");
  
         }
@@ -74,14 +90,16 @@ namespace ConsoleAppHotelBooking
         {
             Console.WriteLine("2.DELUXE ROOM");
             Console.WriteLine("********************************");
-            Console.Write("Enter your Name: ");
-            name = Convert.ToString(Console.ReadLine());
-            Console.Write("Enter your aadhar number: ");
-            aadhar = Convert.ToInt64(Console.ReadLine());
-            Console.Write("Enter your Name: ");
-            name = Convert.ToString(Console.ReadLine());
-            Console.Write("Enter your aadhar number: ");
-            aadhar = Convert.ToInt64(Console.ReadLine());
+            Console.WriteLine("No.of Persons (1/2): ");
+            int persons;
+            persons = Convert.ToInt32(Console.ReadLine());
+            for (int i = 1; i <= persons; i++)
+            {
+                Console.Write("Enter your Name{0}: ",i);
+                name = Convert.ToString(Console.ReadLine());
+                Console.Write("Enter your aadhar number: ");
+                aadhar = Convert.ToInt64(Console.ReadLine());
+            }
             Console.Write("Enter your Number of days: ");
             numofdays = Convert.ToInt32(Console.ReadLine());
             Console.Write("AC / NON-AC: ");
@@ -89,11 +107,17 @@ namespace ConsoleAppHotelBooking
             Console.Write("Enter Check in date: ");
             Check_in_Date = DateTime.Parse(Console.ReadLine());
             Console.Write("Enter Mobile Number: ");
+            Checkoutdate = Check_in_Date.AddDays(numofdays);
             mobile = Convert.ToInt64(Console.ReadLine());
+            single_double = "Deluxe";
         }
 
         public void DeluxeDisplay()
         {
+            Console.WriteLine("********************************");
+            Console.WriteLine("Your Booking Details");
+            Console.WriteLine("********************************");
+            Console.ForegroundColor = ConsoleColor.Blue;
             Console.WriteLine("Name: " + name);
             Console.WriteLine("Aadhar: " + aadhar);
             Console.WriteLine("numofdays: " + numofdays);
@@ -102,6 +126,7 @@ namespace ConsoleAppHotelBooking
             DateTime checkout = Check_in_Date.AddDays(numofdays);
             Console.WriteLine("Check_out: " + checkout.ToString("MM/dd/yyyy"));
             Console.WriteLine("Mobile: " + mobile);
+            Console.ForegroundColor = ConsoleColor.White;
             Console.WriteLine("********************************");
         }
 
@@ -109,6 +134,7 @@ namespace ConsoleAppHotelBooking
 
     class Suite : Hotel
     {
+        string hot_coldwater;
         public void SuiteType()
         {
             Console.WriteLine("3.SUITE ROOM");
@@ -126,14 +152,20 @@ namespace ConsoleAppHotelBooking
             Console.Write("Enter Check in date: ");
             Check_in_Date = DateTime.Parse(Console.ReadLine());
             Console.Write("Enter Mobile Number: ");
+            Checkoutdate = Check_in_Date.AddDays(numofdays);
             mobile = Convert.ToInt64(Console.ReadLine());
             Console.WriteLine("Hot Water needed?");
             hot_coldwater = Convert.ToString(Console.ReadLine());
+            single_double = "Suite";
 
         }
 
         public void SuiteDisplay()
         {
+            Console.WriteLine("********************************");
+            Console.WriteLine("Your Booking Details");
+            Console.WriteLine("********************************");
+            Console.ForegroundColor = ConsoleColor.Blue;
             Console.WriteLine("Room Type: " + single_double);
             Console.WriteLine("Name: " + name);
             Console.WriteLine("Aadhar: " + aadhar);
@@ -144,11 +176,15 @@ namespace ConsoleAppHotelBooking
             Console.WriteLine("Check_out: " + checkout.ToString("MM/dd/yyyy"));
             Console.WriteLine("Mobile: " + mobile);
             Console.WriteLine("Hot Water: " + hot_coldwater);
+            Console.ForegroundColor = ConsoleColor.White;
             Console.WriteLine("********************************");
         }
 
     }
-    class exit
+    class Listbookings : Hotel
+    {
+    }
+    class Exit
     {
         public void ExitType()
         {
@@ -157,14 +193,19 @@ namespace ConsoleAppHotelBooking
             Console.WriteLine("********************************");
         }
     }
-    class Program
+    static class Program
     {
         static void Main(string[] args)
         {
             Hotel hotelobject = new Hotel();
             hotelobject.hotelmethod();
 
+
             int x;
+            int bookingcount = 0;
+
+            Hotel[] hotelbookinglist = new Hotel[100];
+
 
             do
             {
@@ -178,6 +219,8 @@ namespace ConsoleAppHotelBooking
                             Single singleobject = new Single();
                             singleobject.SingleType();
                             singleobject.SingleDisplay();
+                            hotelbookinglist[bookingcount] = singleobject;
+                            bookingcount++;
                             break;
                         }
                     case 2:
@@ -185,6 +228,8 @@ namespace ConsoleAppHotelBooking
                             Deluxe deluxeobject = new Deluxe();
                             deluxeobject.DeluxeTpye();
                             deluxeobject.DeluxeDisplay();
+                            hotelbookinglist[bookingcount] = deluxeobject;
+                            bookingcount++;
                             break;
                         }
                     case 3:
@@ -192,12 +237,23 @@ namespace ConsoleAppHotelBooking
                             Suite suiteobject = new Suite();
                             suiteobject.SuiteType();
                             suiteobject.SuiteDisplay();
+                            hotelbookinglist[bookingcount] = suiteobject;
+                            bookingcount++;
                             break;
                         }
                     case 4:
                         {
-                            exit exitobject = new exit();
+                            Exit exitobject = new Exit();
                             exitobject.ExitType();
+                            break;
+                        }
+                    case 5:
+                        {
+                            Hotel.bookinglistheading();
+                            for(int i = 0; i<bookingcount;i++)
+                            {
+                                hotelbookinglist[i].bookinglist();
+                            }
                             break;
                         }
                 }
