@@ -1,4 +1,4 @@
-- 👋 Hi, I’m Dilip Kumar (@ImDK10) working as Software Engineer {Pega CDH Developer} in Virtusa Blr
+- 👋 Hi, I’m Dilip Kumar (@ImDK10) working as Software Engineer {Pega CDH Developer} at Singtel, Singapore.
 - 👀 I’m interested in Software Development
 -  I'm Good at Pega PRPC, Pega CDH
 -  Python , Java, C# - Intermediate
